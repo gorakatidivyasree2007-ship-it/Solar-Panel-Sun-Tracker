@@ -1,0 +1,18 @@
+#include <Servo.h>
+Servo motor;
+
+void setup() {
+  motor.attach(9);
+}
+
+void loop() {
+  int left = analogRead(A0);
+  int right = analogRead(A1);
+  int angle = motor.read();
+
+  if (left > right + 20) angle += 1;
+  if (right > left + 20) angle -= 1;
+
+  motor.write(constrain(angle, 0, 180));
+  delay(30);
+}
